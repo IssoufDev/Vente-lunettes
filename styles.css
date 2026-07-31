@@ -1,0 +1,935 @@
+/* ==========================================================================
+   1. PARAMÈTRES GLOBAUX & RESET
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. EN-TÊTE & NAVIGATION (HEADER)
+   ========================================================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    position: fixed;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(201, 167, 77, 0.1);
+}
+
+.logo {
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #c9a74d; /* Couleur Dorée Premium */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Animation de la barre sous les liens du menu */
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #c9a74d;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Bouton collection dans le menu */
+.btn-nav {
+    border: 1px solid #c9a74d;
+    padding: 8px 16px;
+    border-radius: 5px;
+    background-color: #c9a74d;
+    color: #000 !important;
+    font-weight: 500;
+}
+
+.btn-nav:hover {
+    background: #fff;
+    border-color: #fff;
+}
+
+/* Bouton Menu Hamburger (Masqué sur PC) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+}
+
+/* ==========================================================================
+   3. SECTION VITRINE (HERO SECTION & SLIDER)
+   ========================================================================== */
+.hero {
+    display: flex;
+    align-items: center;      /* FORCE LE CENTRAGE VERTICAL PARFAIT */
+    justify-content: center;  /* Équilibre l'espace gauche et droite */
+    padding: 90px 60px 60px;
+    min-height: 100vh;
+    gap: 60px;                /* Espace harmonieux entre le texte et le slider */
+}
+
+.hero-left {
+    max-width: 50%;
+    flex: 1;
+}
+
+.tag {
+    color: #c9a74d;
+    margin-bottom: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    font-size: 70px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    color: #c9a74d;
+}
+
+.desc {
+    margin: 20px 0 35px;
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Bouton principal */
+.btn {
+    background: #c9a74d;
+    color: black;
+    font-weight: bold;
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: black;
+    transform: translateY(-2px);
+}
+
+/* Conteneur de droite (Slider) */
+.hero-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;      /* Centre l'image verticalement dans son bloc */
+    width: 100%;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(201, 167, 77, 0.15);
+    margin: 0 auto;           /* Centre le bloc horizontalement */
+}
+
+.slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Structure des slides individuels */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.slider-container:hover .slide img {
+    transform: scale(1.03);
+}
+
+/* Flèches de navigation (Précédent / Suivant) */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(201, 167, 77, 0.3);
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    transition: 0.3s;
+    opacity: 0;
+    z-index: 10;
+}
+
+.slider-container:hover .slider-btn {
+    opacity: 1;
+}
+
+.slider-btn:hover {
+    background: #c9a74d;
+    color: #000;
+}
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
+
+/* Points de navigation du bas */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+}
+
+.dot.active, .dot:hover {
+    background: #c9a74d;
+    width: 25px;
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   4. SECTION AVANTAGES
+   ========================================================================== */
+.advantages {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 20px;
+    background: #0f0f0f;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.advantage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.advantage i {
+    font-size: 32px;
+    color: #c9a74d;
+}
+
+.advantage p {
+    font-size: 15px;
+    color: #ccc;
+}
+
+.advantage:hover {
+    transform: translateY(-5px);
+}
+
+.advantage:hover i {
+    color: #e5c76b;
+}
+/* ==========================================================================
+   5. SECTION BOUTIQUE / PRODUITS (NOIR PRO & DIAPORAMA INTÉGRÉ)
+   ========================================================================== */
+.products {
+    background: #0b0b0d; /* Fond noir pro */
+    color: white;
+    padding: 100px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.products h2 {
+    font-size: 36px;
+    color: gold;
+    margin-bottom: 50px;
+}
+
+.products h2::after { display: none; }
+
+.slider-products-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.grid-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 15px 0;
+}
+
+.grid {
+    display: flex;
+    gap: 25px;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+
+.card {
+    background: #141417; /* Gris très sombre */
+    color: white;
+    border-radius: 15px;
+    padding: 24px;
+    flex: 0 0 calc(33.333% - 17px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(201, 167, 77, 0.1);
+}
+
+/* MÉCANIQUE DU DIAPORAMA INTERNE A LA CARTE */
+.card-slider {
+    position: relative;
+    width: 100%;
+    height: 230px; /* Même hauteur fixe */
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1a1a1e;
+}
+
+.card-slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s;
+}
+
+.card-slider img.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.card h3 {
+    margin: 20px 0 6px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.card p {
+    color: #c9a74d;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.card button {
+    background: #25D366; 
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+}
+
+.card button:hover { background: #1ebd59; }
+
+.prod-slider-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 15;
+    transition: 0.3s;
+}
+.prod-slider-btn:hover { background: #c9a74d; color: #000; border-color: #c9a74d; }
+.prev-prod { left: -65px; }
+.next-prod { right: -65px; }
+.btn-see-more{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    width:85%;
+    margin:15px auto;
+
+    padding:10px;
+    background:gold;
+    color:#000;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+
+    transition:0.3s;
+}
+
+.btn-see-more:hover{
+    transform:scale(1.05);
+}
+
+/* ==========================================================================
+   6. SECTION À PROPOS (ABOUT)
+   ========================================================================== */
+.about {
+    padding: 120px 60px;
+    background: #000;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-text {
+    max-width: 50%;
+}
+
+.about-text h2 {
+    font-size: 42px;
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+.about-text p {
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.about-img img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 15px;
+    border: 1px solid rgba(201, 167, 77, 0.2);
+}
+
+/* ==========================================================================
+   7. SECTION CONTACT
+   ========================================================================== */
+.contact {
+    padding: 120px 60px;
+    text-align: center;
+    background: #0a0a0a;
+}
+
+.contact h2 {
+    font-size: 38px;
+    margin-bottom: 50px;
+}
+
+.contact-box {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.box {
+    background: #111;
+    padding: 35px 25px;
+    border-radius: 15px;
+    width: 280px;
+    transition: 0.3s;
+    border: 1px solid #1a1a1a;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.box i {
+    font-size: 35px;
+    color: #c9a74d;
+    margin-bottom: 20px;
+}
+
+.box h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.box p {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.box span {
+    font-size: 13px;
+    color: #888;
+}
+
+.box:hover {
+    transform: translateY(-10px);
+    background: #161616;
+    border-color: rgba(201, 167, 77, 0.3);
+}
+
+/* ==========================================================================
+   8. PIED DE PAGE (FOOTER)
+   ========================================================================== */
+.footer {
+    background: #000;
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 1px solid #111;
+}
+
+.footer-top h2 {
+    color: #c9a74d;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.footer-top p {
+    color: #888;
+    font-size: 14px;
+}
+
+.footer-socials {
+    margin: 30px 0;
+}
+
+.footer-socials a {
+    margin: 0 15px;
+    font-size: 24px;
+    color: white;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.footer-socials a:hover {
+    color: #c9a74d;
+    transform: translateY(-5px);
+}
+
+.footer-bottom {
+    font-size: 13px;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* ==========================================================================
+   9. BOUTON FLOTTANT WHATSAPP (AVEC EFFET PULSE)
+   ========================================================================== */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    z-index: 999;
+    transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-btn::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #25D366;
+    opacity: 0.6;
+    animation: pulse 1.8s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ==========================================================================
+   10. ANIMATIONS AU SCROLL (INTERSECTION OBSERVER)
+   ========================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.desc.reveal-visible { transition-delay: 0.15s; }
+.btn.reveal-visible { transition-delay: 0.3s; }
+
+.prev-prod,
+    .next-prod {
+        display: none !important;
+    }
+
+    /* BUTTON FLEXHE */
+.scroll-top{
+    position: fixed;
+    bottom: 30px;          /* en bas */
+    left: 50%;             /* centre horizontal */
+    transform: translateX(-50%) translateY(20px);
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    background: gold;
+    color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 20px;
+    text-decoration: none;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+/* visible */
+.scroll-top.show{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* hover */
+.scroll-top:hover{
+    transform: translateX(-50%) scale(1.1);
+}
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+
+/* Écrans intermédiaires (Tablettes paysage / Petits PC) */
+@media (max-width: 1024px) {
+    header { padding: 15px 40px; }
+    .hero { padding: 140px 40px 60px; gap: 20px; }
+    .hero h1 { font-size: 52px; }
+    .slider-container { max-width: 420px; height: 420px; }
+    .about-container { flex-direction: column; text-align: center; gap: 40px; }
+    .about-text { max-width: 100%; }
+    .prev-prod { left: -20px; }
+    .next-prod { right: -20px; }
+}
+
+/* Tablettes verticales et Téléphones larges (Menu mobile activé) */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+        font-size: 26px;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    header {
+        padding: 15px 20px;
+    }
+
+    /* MENU SLIDE (IMPORTANT) */
+   #nav {
+    position: fixed;
+    top: 70px;              /* juste sous le header */
+    right: -100%;
+
+    width: 200px;           /* 👈 menu compact */
+    height: auto;           /* 👈 ne prend plus toute la hauteur */
+
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(12px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px 10px;
+    border-radius: 14px;
+
+    transition: 0.35s ease;
+    z-index: 1000;
+
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+#nav.active {
+    right: 15px;   /* 👈 apparaît comme une petite carte à droite */
+}
+
+nav a {
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+    padding: 6px 0;
+}
+
+.btn-nav {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+}
+
+    /* HERO ajustement propre */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 100px;
+        gap: 40px;
+    }
+
+    .slider-container {
+        max-width: 380px;
+        height: 380px;
+    }
+
+    .advantages {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .card {
+        flex: 0 0 100%;
+    }
+    .products h2 {
+    font-size: 30px;
+    color: rgba(255, 217, 0, 0.767);
+    margin-bottom: 50px;
+}
+
+}
+
+
+
+
+/* Smartphones et petits écrans (Correction Affichage Image) */
+@media (max-width: 480px) {
+
+    /* HEADER */
+    header {
+        padding: 15px 20px;
+    }
+
+    /* HERO */
+    .hero {
+        padding: 90px 15px 40px 15px;
+        gap: 25px;
+        min-height: auto;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    /* HERO IMAGE */
+    .hero-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .slider-container {
+        display: block !important;
+        width: 100%;
+        max-width: 320px;
+        height: 320px;
+        margin: 0 auto;
+    }
+
+    .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* =========================
+       COLLECTION FIX (IMPORTANT)
+    ========================= */
+
+    /* force 1 colonne propre */
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+
+    /* cards full width */
+    .card {
+        width: 100%;
+        flex: unset;   /* 🔥 enlève bug flex */
+    }
+
+    /* supprime slider buttons collection */
+    .prev-prod,
+    .next-prod {
+        display: none !important;
+    }
+
+    /* BUTTON NAV */
+    .btn-nav {
+        width: 80%;
+        text-align: center;
+    }
+
+    /* WHATSAPP BUTTON */
+    .whatsapp-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+    .products {
+        padding: 50px 20px;
+    }
+
+    /* Force la grille à empiler les éléments */
+    .grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    /* Force la carte à prendre toute la largeur disponible */
+    .card {
+        flex: 0 0 100%;
+        width: 100%;
+        margin: 0;
+    }
+}
+
