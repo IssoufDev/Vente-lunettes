@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="MAMOUTOU COLLECTION — Lunettes premium 2026. Style, classe, puissance. Livraison rapide au Mali." />
+<meta name="theme-color" content="#000000" />
+<meta property="og:title" content="MAMOUTOU COLLECTION | Lunettes Premium" />
+<meta property="og:description" content="Collection 2026 — Des lunettes premium inspirées des grandes marques." />
+<meta property="og:type" content="website" />
+<title>MAMOUTOU COLLECTION | Lunettes Premium</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="styles.css?v=4.0" />
+</head>
+<body>
+
+<header>
+  <div class="logo">MAMOUTOU <span>COLLECTION</span></div>
+  <nav id="nav" aria-label="Navigation principale">
+    <a href="#home">Accueil</a>
+    <a href="#advantages">Avantages</a>
+    <a href="#products">Collection</a>
+    <a href="#about">À propos</a>
+    <a href="#contact">Contact</a>
+    <a href="collection.html" class="btn-nav"> Voir Collection</a>
+  </nav>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-controls="nav" aria-expanded="false">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="tag reveal">COLLECTION 2026</p>
+    <h1 class="reveal">STYLE.<br/>CLASSE.<br/><span>PUISSANCE.</span></h1>
+    <p class="desc reveal">
+      Des lunettes premium pour ceux qui veulent se démarquer avec élégance.
+    </p>
+    <a href="collection.html" class="btn reveal">Découvrir la collection</a>
+  </div>
+
+  <div class="hero-right">
+    <div class="slider-container">
+      <div class="slider" id="slider">
+        <div class="slide active">
+          <img src="./images/lunette.JPG" alt="Lunettes Luxury Black" />
+        </div>
+        <div class="slide">
+          <img src="./images/lunette2.jpg" alt="Lunettes Elite Shadow" />
+        </div>
+        <div class="slide">
+          <img src="./images/lunette3.jpg"  alt="Lunettes Golden Icon" />
+        </div>
+        <div class="slide">
+          <img src="./images/lunette4.JPG" alt="Lunettes Black Square" />
+        </div>
+      </div>
+      <button class="slider-btn prev-btn" id="prevBtn" aria-label="Précédent"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="slider-btn next-btn" id="nextBtn" aria-label="Suivant"><i class="fa-solid fa-chevron-right"></i></button>
+      <div class="slider-dots" id="dots"></div>
+    </div>
+  </div>
+</section>
+
+<section class="advantages" id="advantages">
+  <div class="advantage reveal"><i class="fa-solid fa-gem"></i><p>Qualité premium</p></div>
+  <div class="advantage reveal"><i class="fa-solid fa-sun"></i><p>Protection UV400</p></div>
+  <div class="advantage reveal"><i class="fa-solid fa-truck-fast"></i><p>Livraison rapide</p></div>
+  <div class="advantage reveal"><i class="fa-solid fa-heart"></i><p>Satisfait ou remboursé</p></div>
+</section>
+
+<section class="products" id="products">
+ <h2 class="reveal">Collection Exclusive</h2>
+  
+  <div class="slider-products-container">
+    <button class="prod-slider-btn prev-prod" id="prevProd" aria-label="Précédent">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    
+    <div class="grid-wrapper">
+      <div class="grid" id="productsGrid">
+        <div class="card reveal">
+          <div class="card-slider">
+            <img src="./images/lunette5a.JPG" class="active" alt="Black Square 1" />
+            <img src="./images/lunette6a.JPG" alt="Black Square 2" />
+            <img src="./images/lunette7a.JPG" alt="Black Square 3" />
+          </div>
+          <h3>Black Square</h3>
+          <p>17 000 FCFA</p>
+          <a href="collection.html" class="btn-see-more"><i class="fa-solid fa-eye"></i> Voir plus</a>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-slider">
+            <img src="./images/lunette8.JPG" class="active" alt="Ocean Blue 1" />
+            <img src="./images/lunette20.JPG" alt="Ocean Blue 2" />
+            <img src="./images/lunette10.JPG" alt="Ocean Blue 3" />
+          </div>
+          <h3>Ocean Blue</h3>
+          <p>18 500 FCFA</p>
+          <a href="collection.html" class="btn-see-more"><i class="fa-solid fa-eye"></i> Voir plus</a>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-slider">
+            <img src="./images/lunette14o.JPG" class="active" alt="Night Aviator 1" />
+            <img src="./images/lunette12o.JPG" alt="Night Aviator 2" />
+            <img src="./images/lunette13o.JPG" alt="Night Aviator 3" />
+          </div>
+          <h3>OFF-WHITE</h3>
+          <p>22 000 FCFA</p>
+         <a href="collection.html" class="btn-see-more"><i class="fa-solid fa-eye"></i> Voir plus</a>
+        </div>
+      </div>
+    </div>
+
+    <button class="prod-slider-btn next-prod" id="nextProd" aria-label="Suivant">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-container">
+
+    <div class="about-text reveal">
+      <p class="tag">À PROPOS</p>
+
+      <h2 class="h2_about">Style. Confiance. Impact.</h2>
+
+      <p>
+        MAMOUTOU COLLECTION propose des lunettes modernes inspirées des grandes marques,
+        conçues pour renforcer ton style au quotidien.
+        Chaque modèle est sélectionné pour offrir qualité, élégance et confort.
+      </p>
+
+      <p>
+        Notre objectif est simple : te permettre d’avoir un look premium sans te compliquer la vie.
+      </p>
+
+      <a href="collection.html" class="btn">Découvrir la collection</a>
+    </div>
+
+    <div class="about-img reveal">
+      <img src="./images/off.jpg" alt="Boutique MAMOUTOU COLLECTION" />
+    </div>
+
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="reveal">CONTACTEZ-NOUS</h2>
+  <div class="contact-box">
+    <a href="https://wa.me/22367498538" target="_blank" rel="noopener" class="box reveal"><i class="fa-brands fa-whatsapp"></i>
+      <h3>WhatsApp</h3>
+      <p>+223 67 49 85 38</p>
+      <span>Réponse rapide</span>
+    </a>
+    <a href="tel:+22367498538" class="box reveal"><i class="fa-solid fa-phone"></i>
+      <h3>Téléphone</h3>
+      <p>+223 67 49 85 38</p>
+      <span>Disponible 8h - 20h</span>
+    </a>
+    <a href="https://www.snapchat.com/add/legz243" target="_blank" rel="noopener" class="box reveal"><i class="fa-brands fa-snapchat"></i>
+      <h3>Snapchat</h3>
+      <p>The All Terrain</p>
+      <span>Ajoutez-nous</span>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <h2>MAMOUTOU COLLECTION</h2>
+    <p>Style haut de gamme inspiré des grandes marques.</p>
+  </div>
+  <div class="footer-socials">
+    <a href="https://www.snapchat.com/add/legz243" target="_blank" rel="noopener" aria-label="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
+    <a href="https://wa.me/22367498538" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+   <a href="https://www.tiktok.com/@mamoutoucollection67" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+  </div>
+  <div class="footer-bottom">
+    © 2026 MAMOUTOU COLLECTION — Tous droits réservés.
+  </div>
+</footer>
+
+<a href="https://wa.me/22367498538" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a href="#home" class="scroll-top" id="scrollTopBtn">
+  <i class="fa-solid fa-arrow-up"></i>
+</a>
+
+<script src="index.js"></script>
+</body>
+</html>
+
+

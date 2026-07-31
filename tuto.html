@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+    //     let a = "salut"
+    //     let b = "les gens"
+    //     const isMajeur = false
+    //     const notes= [13,
+    //      20, 
+    //      10, 
+    //      "hello", 
+    //     [1,2,3,4]
+    // ]
+
+    //   const person= {
+    //     nom: "john",
+    //     prenom:"Dupont",
+    //     age:20,
+    //     notes:[10,14,15],
+    //     job:{
+    //         name:"developpeur",
+    //         hours: 8
+    //     }
+    //   }
+
+
+    // const age = 17
+    // const pays = "US"
+
+
+    // if( 
+    //     (pays === "ML" && age >=18)|| 
+    //     (pays === "US" && age >=16)){
+    //     console.log("vous avez le droit de conduire")
+    // } else{
+    //     console.log("vous n'avez pas le droit de conduire")
+    // }
+    // const ages = 2022
+    // const annee = prompt("Votre date de naissance?")
+    // const age = prompt("Quel est votre age?")
+    // if(age <=13){
+    //     console.log("lilo et strich")
+    // } else if (age > 13 && age < 18){
+    //     console.log("Matrix")
+    // } else{
+    //     console.log("Evil dead")
+    // }
+
+    // const a = prompt("donnez un premier nombre")
+    //  const b = prompt("donnez un deuxieme nombre")
+    //  const calcul = a * b
+    //  let signe
+    //  if(calcul >0){
+    //     signe ="positif"
+    //     console.log(`${a}x${b}=${calcul} est positif` )
+    //  } else{
+    //     signe= "negatif"
+    //     console.log(`${a}x${b}=${calcul} est negatif`)
+    //  }
+   // let guess = 8
+    // let chiffre
+    // while(chiffre != guess) {
+    //     chiffre= prompt("Votre chiffre") *1
+    //     if(chiffre < guess) {
+    //         console.log("plus")
+    //     } else if (chiffre > guess) {
+    //         console.log("Moins")
+    //     } else{
+    //         break
+    //     }
+    // } 
+    //  console.log(canDrive(18, "US"))
+    // function canDrive(age, pays){
+    //     if(
+    //         (age >= 18 && pays === "FR") ||
+    //         (age >= 16 && pays === "US")
+    //     ) {
+    //         return true
+    //     } 
+    //         return false
+    // } 
+    //   function greeting(name){
+    //     return(`Bonjour ${name}`)
+    //   }
+    //   console.log(greeting("issouf"))
+    //   console.log(greeting( "Moussa"))
+       
+     
+       
+    //   let a = Number(prompt("Donnez un premier numero"))
+    //   let b = Number(prompt("Donnez un second numero"))
+    //   let calcul = a * b
+    //   if(calcul < 0){
+    //     console.log("Votre nombre est negatif")
+    //   } else {
+    //     console.log("Votre nombre est positif")
+    //   }
+
+
+  //  let user=[
+  //   {nom:"Issouf",age:19},
+  //   {nom:"Sidiki",age:17},
+  //   {nom:"Madou",age:19},
+  //  ]
+
+  // let majeurs= user.filter(user => user.age>=18)
+  // majeurs.forEach(user =>{
+  //   console.log(`${user.nom} est majeur`)
+  // })
+  const users=[
+    {nom:"Issouf",age:19,actif:true},
+    {nom:"Madou",age:17,actif:false},
+    {nom:"Sidiki",age:25,actif:true},
+    {nom:"Ali",age:-2,actif:true},
+    {nom:"Moussa",age:121,actif:false},
+  ]; 
+
+   let statutAge=[];
+   let statutActif=[];
+   let statutNom=[];
+  function verificationUsers(users){
+    if(users.nom){
+      statutNom= `${users.nom}`
+    }
+    if(users.age <0 ||users.age >120){
+      statutAge= "age invalide"
+    }
+    if(users.age >=18){
+    statutAge= "Majeur"
+    } else {
+      statutAge= "Mineur"
+    } 
+    if(users.actif){
+      statutActif= "Actif"
+    } else{
+      statutActif= "Inactif"
+    }
+  }
+
+  for(let i=0;i<users.length;i++){
+    let resultat= verificationUsers(users[i])
+    console.log(`${statutNom} ${statutAge}-${statutActif}`)
+  }
+      
+    </script>
+</body>
+
+</html>  
