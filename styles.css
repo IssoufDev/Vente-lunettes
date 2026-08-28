@@ -624,7 +624,7 @@ nav a:hover::after {
    ========================================================================== */
 .whatsapp-btn {
     position: fixed;
-    bottom: 30px;
+    bottom: 42px;
     right: 30px;
     background: #25D366;
     color: white;
