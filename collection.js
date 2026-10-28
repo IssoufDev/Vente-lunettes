@@ -15,11 +15,19 @@ function normalizeText(value) {
 }
 
 function filterProducts() {
-    const query = normalizeText(searchInput.value.trim());
+    const query = normalizeText(searchInput.value).split(" ").filter(Boolean);
     let visibleCount = 0;
 
     cards.forEach((card) => {
-        const matches = normalizeText(card.dataset.name).includes(query);
+        const searchableText = normalizeText([
+            card.dataset.name,
+            card.querySelector("h2")?.textContent,
+            card.querySelector(".product-type")?.textContent
+        ].filter(Boolean).join(" "));
+        const compactQuery = query.join("");
+        const compactText = searchableText.replace(/\s/g, "");
+        const matches = query.every((term) => searchableText.includes(term))
+            || (compactQuery.length > 0 && compactText.includes(compactQuery));
         card.hidden = !matches;
         visibleCount += Number(matches);
     });

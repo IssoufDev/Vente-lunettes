@@ -649,12 +649,26 @@ textarea:focus-visible {
     width: 36px;
     height: 36px;
     place-items: center;
-    color: var(--ink);
-    background: #eef1eb;
-    border: 0;
+    color: var(--forest);
+    background: #edf2eb;
+    border: 1px solid #d5e0d4;
     border-radius: 2px;
     font-size: 24px;
     cursor: pointer;
+}
+
+#close.modal-close {
+    color: var(--forest);
+}
+
+.modal-close:hover {
+    color: #fff;
+    background: var(--forest-light);
+    border-color: var(--forest-light);
+}
+
+#close.modal-close:hover {
+    color: #fff;
 }
 
 .modal-content h2 {
