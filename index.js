@@ -44,9 +44,6 @@ function goTo(i) {
   dots.forEach((dot, index) => dot.setAttribute('aria-current', index === current ? 'true' : 'false'));
   resetAutoplay();
 }
-document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
-document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
-
 function startAutoplay() {
   if (!prefersReducedMotion) autoplay = setInterval(() => goTo(current + 1), 4000);
 }
