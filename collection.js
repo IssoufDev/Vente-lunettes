@@ -97,13 +97,9 @@ orderForm.addEventListener("submit", (event) => {
         `Modèle : ${productInput.value}`,
         `Nom : ${document.getElementById("name").value}`,
         `Couleur : ${document.getElementById("color").value}`,
-        `Quantité : ${document.getElementById("quantity").value}`,
         `Téléphone : ${document.getElementById("phone").value}`,
-        `Adresse : ${document.getElementById("address").value}`,
-        document.getElementById("message").value.trim()
-            ? `Précision : ${document.getElementById("message").value.trim()}`
-            : ""
-    ].filter(Boolean).join("\n");
+        `Adresse : ${document.getElementById("address").value}`
+    ].join("\n");
 
     window.open(`https://wa.me/22367498538?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
 });

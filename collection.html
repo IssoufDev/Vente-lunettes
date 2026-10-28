@@ -229,16 +229,10 @@
                     <div><label for="color">Couleur</label><input type="text" id="color" placeholder="Votre choix"
                             required></div>
                 </div>
-                <div class="form-row">
-                    <div><label for="quantity">Quantité</label><input type="number" id="quantity" min="1" value="1"
-                            required></div>
-                    <div><label for="phone">Téléphone</label><input type="tel" id="phone" placeholder="Votre numéro"
-                            autocomplete="tel" required></div>
-                </div>
+                <label for="phone">Téléphone</label>
+                <input type="tel" id="phone" placeholder="Votre numéro" autocomplete="tel" required>
                 <label for="address">Adresse de livraison</label>
                 <input type="text" id="address" placeholder="Quartier, ville" autocomplete="street-address" required>
-                <label for="message">Précision <span>(facultatif)</span></label>
-                <textarea id="message" placeholder="Un détail à nous communiquer ?"></textarea>
                 <button type="submit" class="send-btn"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     Continuer sur WhatsApp</button>
             </form>
