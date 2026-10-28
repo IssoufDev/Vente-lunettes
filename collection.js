@@ -1,153 +1,133 @@
-// RECHERCHE
-
 const searchInput = document.getElementById("search");
-
-searchInput.addEventListener("keyup", () => {
-
-    const value = searchInput.value.toLowerCase();
-
-    document.querySelectorAll(".card").forEach(card => {
-
-        const name = card.dataset.name.toLowerCase();
-
-        if(name.includes(value)){
-            card.style.display = "block";
-        }else{
-            card.style.display = "none";
-        }
-
-    });
-
-});
-
-
-// MODAL
-
+const cards = [...document.querySelectorAll(".card")];
+const resultCount = document.getElementById("resultCount");
+const emptyState = document.getElementById("emptyState");
 const modal = document.getElementById("modal");
+const modalDialog = modal.querySelector(".modal-content");
 const productInput = document.getElementById("product");
-const closeBtn = document.getElementById("close");
+const closeButton = document.getElementById("close");
+const orderForm = document.getElementById("orderForm");
+const scrollButton = document.getElementById("scrollTopBtn");
+let lastTrigger = null;
 
-document.querySelectorAll(".btn-order").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const card = button.closest(".card");
-
-        productInput.value = card.dataset.name;
-
-        modal.style.display = "flex";
-
-    });
-
-});
-
-closeBtn.addEventListener("click", () => {
-
-    modal.style.display = "none";
-
-});
-
-window.addEventListener("click", (e) => {
-
-    if(e.target === modal){
-
-        modal.style.display = "none";
-
-    }
-
-});
-
-
-// WHATSAPP
-
-function sendWhatsApp(){
-
-    const produit = document.getElementById("product").value;
-    const name = document.getElementById("name").value;
-    const couleur = document.getElementById("color").value;
-    const quantite = document.getElementById("quantity").value;
-    const telephone = document.getElementById("phone").value;
-    const adresse = document.getElementById("address").value;
-    const message = document.getElementById("message").value;
-
-    const texte =
-
-`Bonjour MAMOUTOU COLLECTION,
-Ces ${name}
-Je souhaite commander :
-Lunettes : ${produit}
-Couleur : ${couleur}
-Quantité : ${quantite}
-Téléphone : ${telephone}
-Adresse : ${adresse}
-
-Message :
-${message}
-Merci.`;
-
-    const numero = "22367498538";
-
-    const url =
-    `https://wa.me/${numero}?text=${encodeURIComponent(texte)}`;
-
-    window.open(url, "_blank");
-
+function normalizeText(value) {
+    return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 
+function filterProducts() {
+    const query = normalizeText(searchInput.value.trim());
+    let visibleCount = 0;
 
-// SLIDERS AUTOMATIQUES
+    cards.forEach((card) => {
+        const matches = normalizeText(card.dataset.name).includes(query);
+        card.hidden = !matches;
+        visibleCount += Number(matches);
+    });
 
-const sliders = document.querySelectorAll(".slider");
+    resultCount.textContent = `${visibleCount} modèle${visibleCount === 1 ? "" : "s"}`;
+    emptyState.hidden = visibleCount > 0;
+}
 
-sliders.forEach(slider => {
+searchInput.addEventListener("input", filterProducts);
+filterProducts();
 
-    const images = slider.querySelectorAll("img");
+document.addEventListener("keydown", (event) => {
+    const activeElement = document.activeElement;
+    const isTyping = activeElement instanceof HTMLElement
+        && (activeElement.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(activeElement.tagName));
 
-    let index = 0;
-
-    setInterval(() => {
-
-        images[index].classList.remove("active");
-
-        index++;
-
-        if(index >= images.length){
-            index = 0;
-        }
-
-        images[index].classList.add("active");
-
-    }, 3000);
-
-});
-
-//   FLECHE
-const scrollBtn = document.getElementById("scrollTopBtn");
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-        scrollBtn.classList.add("show");
-    } else {
-        scrollBtn.classList.remove("show");
+    if (event.key === "/" && !isTyping) {
+        event.preventDefault();
+        searchInput.focus();
     }
 });
 
-// clic → scroll smooth
-scrollBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+function closeOrderModal() {
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    lastTrigger?.focus();
+}
+
+document.querySelectorAll(".btn-order").forEach((button) => {
+    button.addEventListener("click", () => {
+        const card = button.closest(".card");
+        lastTrigger = button;
+        productInput.value = card.dataset.name;
+        modal.hidden = false;
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        modalDialog.focus();
+        document.getElementById("name").focus();
     });
 });
 
-document.getElementById("orderForm").addEventListener("submit", function(e){
-    e.preventDefault();
+closeButton.addEventListener("click", closeOrderModal);
+modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeOrderModal();
+});
 
-    if(!this.checkValidity()){
-        this.reportValidity();
+modal.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeOrderModal();
         return;
     }
 
-    sendWhatsApp();
+    if (event.key !== "Tab") return;
+    const focusable = [...modal.querySelectorAll("button, input, textarea")]
+        .filter((element) => !element.disabled && element.getClientRects().length > 0);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+    }
+});
+
+orderForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!orderForm.reportValidity()) return;
+
+    const message = [
+        "Bonjour MAMOUTOU COLLECTION, je souhaite passer une commande.",
+        `Modèle : ${productInput.value}`,
+        `Nom : ${document.getElementById("name").value}`,
+        `Couleur : ${document.getElementById("color").value}`,
+        `Quantité : ${document.getElementById("quantity").value}`,
+        `Téléphone : ${document.getElementById("phone").value}`,
+        `Adresse : ${document.getElementById("address").value}`,
+        document.getElementById("message").value.trim()
+            ? `Précision : ${document.getElementById("message").value.trim()}`
+            : ""
+    ].filter(Boolean).join("\n");
+
+    window.open(`https://wa.me/22367498538?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+});
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll(".slider").forEach((slider) => {
+        const images = [...slider.querySelectorAll("img")];
+        if (images.length < 2) return;
+
+        let current = 0;
+        window.setInterval(() => {
+            images[current].classList.remove("active");
+            current = (current + 1) % images.length;
+            images[current].classList.add("active");
+        }, 4000);
+    });
+}
+
+function updateScrollButton() {
+    scrollButton.classList.toggle("show", window.scrollY > 300);
+}
+
+window.addEventListener("scroll", updateScrollButton, { passive: true });
+scrollButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
 });
