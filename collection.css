@@ -161,6 +161,7 @@ header p {
     font-size: 14px;
 }
 
+.card[hidden] { display: none !important; }
 /* textarea spécifique */
 .modal-content textarea {
     resize: none;
